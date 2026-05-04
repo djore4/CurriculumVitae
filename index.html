@@ -78,11 +78,22 @@
   /* Photo block */
   .photo-block {
     background: var(--navy);
-    padding: 0 24px 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
+    padding: 28px 24px 22px;
     position: relative;
+  }
+
+  .photo-block::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--green);
   }
 
   .photo-wrap {
@@ -194,7 +205,13 @@
     border-radius: 50%;
     background: rgba(255,255,255,0.15);
   }
+
   .dot.fill { background: var(--green); }
+
+  /* Half dot: left half green, right half empty */
+  .dot.half {
+    background: linear-gradient(90deg, var(--green) 50%, rgba(255,255,255,0.15) 50%);
+  }
 
   /* AI Tools */
   .tools-wrap {
@@ -276,14 +293,6 @@
     min-height: 0;
   }
 
-  /* Unified header: sidebar photo-block and top-bar are same height */
-  .photo-block {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 28px 24px 22px;
-  }
-
   .top-bar::after {
     content: '';
     position: absolute;
@@ -292,17 +301,6 @@
     right: 0;
     height: 3px;
     background: linear-gradient(90deg, var(--green), rgba(45,224,127,0.3));
-  }
-
-  /* Green line also on sidebar bottom of photo area to mirror top-bar */
-  .photo-block::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: var(--green);
   }
 
   .top-bar .name {
@@ -314,9 +312,7 @@
     text-transform: uppercase;
   }
 
-  .top-bar .name span {
-    color: var(--green);
-  }
+  .top-bar .name span { color: var(--green); }
 
   .top-bar .role {
     font-size: 8px;
@@ -336,39 +332,6 @@
     max-width: 360px;
   }
 
-  /* AI Badge */
-  .ai-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    background: var(--green-dim);
-    border: 1px solid rgba(45,224,127,0.4);
-    border-radius: 3px;
-    padding: 3px 8px;
-    margin-top: 10px;
-  }
-
-  .ai-badge .ai-dot {
-    width: 5px;
-    height: 5px;
-    border-radius: 50%;
-    background: var(--green);
-    animation: pulse 2s infinite;
-  }
-
-  @keyframes pulse {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
-  }
-
-  .ai-badge span {
-    font-size: 6.5px;
-    font-weight: 700;
-    color: var(--green);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-  }
-
   /* Content area */
   .content-area {
     padding: 20px 28px 24px;
@@ -376,9 +339,7 @@
   }
 
   /* Section */
-  .section {
-    margin-bottom: 18px;
-  }
+  .section { margin-bottom: 18px; }
 
   .section-title {
     font-size: 7.5px;
@@ -427,13 +388,10 @@
   }
 
   .exp-item.current::before {
-    background: var(--green);
     box-shadow: 0 0 0 3px rgba(45,224,127,0.2);
   }
 
-  .exp-item.current {
-    border-left-color: var(--green);
-  }
+  .exp-item.current { border-left-color: var(--green); }
 
   .exp-header {
     display: flex;
@@ -490,35 +448,6 @@
     font-weight: 600;
   }
 
-  /* AI Impact note */
-  .ai-impact {
-    display: flex;
-    align-items: flex-start;
-    gap: 5px;
-    background: #f0fdf6;
-    border-left: 2px solid var(--green);
-    padding: 4px 7px;
-    border-radius: 0 3px 3px 0;
-    margin-top: 4px;
-  }
-
-  .ai-impact-label {
-    font-size: 6px;
-    font-weight: 700;
-    color: #1a8a52;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-
-  .ai-impact-text {
-    font-size: 7px;
-    color: #2d7a50;
-    line-height: 1.5;
-  }
-
   /* Education */
   .edu-item {
     display: flex;
@@ -536,8 +465,6 @@
     padding-top: 1px;
   }
 
-  .edu-content {}
-
   .edu-degree {
     font-size: 8.5px;
     font-weight: 700;
@@ -552,26 +479,13 @@
     margin-top: 1px;
   }
 
-  .edu-badge {
-    display: inline-block;
-    background: var(--green-dim);
-    border: 1px solid rgba(45,224,127,0.3);
-    color: #1a8a52;
-    font-size: 6px;
-    font-weight: 700;
-    padding: 1px 5px;
-    border-radius: 2px;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-top: 2px;
-  }
-
   /* Dev platforms */
   .platform-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-bottom: 4px;
+    display: grid;
+    grid-template-columns: 8px 80px 1fr;
+    align-items: baseline;
+    gap: 0 5px;
+    margin-bottom: 5px;
   }
 
   .platform-dot {
@@ -580,19 +494,21 @@
     border-radius: 50%;
     background: var(--green);
     flex-shrink: 0;
+    margin-top: 3px;
   }
 
   .platform-link {
     font-size: 7px;
     color: #0d1b2a;
-    font-weight: 500;
-    text-decoration: none;
+    font-weight: 600;
+    white-space: nowrap;
   }
 
   .platform-desc {
     font-size: 6.5px;
     color: #888;
     font-weight: 400;
+    line-height: 1.5;
   }
 
   /* Footer */
@@ -617,36 +533,15 @@
 
   /* ─── PRINT ─── */
   @media print {
-    body {
-      background: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .page {
-      width: 210mm;
-      height: 297mm;
-      box-shadow: none;
-      margin: 0;
-      overflow: hidden;
-    }
-
-    @page {
-      size: A4;
-      margin: 0;
-    }
+    body { background: none; padding: 0; margin: 0; }
+    .page { width: 210mm; height: 297mm; box-shadow: none; margin: 0; overflow: hidden; }
+    @page { size: A4; margin: 0; }
   }
 
   @media screen and (max-width: 800px) {
     body { padding: 0; }
-    .page {
-      width: 100%;
-      flex-direction: column;
-    }
-    .sidebar {
-      width: 100%;
-      min-height: auto;
-    }
+    .page { width: 100%; flex-direction: column; }
+    .sidebar { width: 100%; min-height: auto; }
   }
 </style>
 </head>
@@ -656,7 +551,6 @@
   <!-- ══════════ SIDEBAR ══════════ -->
   <aside class="sidebar">
 
-    <!-- Photo -->
     <div class="photo-block">
       <div class="photo-wrap">
         <span class="photo-initials">JD</span>
@@ -666,39 +560,24 @@
     <!-- Contact -->
     <div class="s-section">
       <div class="s-label">Contacto</div>
-
       <div class="contact-item">
-        <div class="c-icon">
-          <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.56.57 1 1 0 011 1v3.57a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.59a1 1 0 011 1 11.36 11.36 0 00.57 3.57 1 1 0 01-.25 1z"/></svg>
-        </div>
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 006.59 6.59l2.2-2.2a1 1 0 011.01-.24 11.36 11.36 0 003.56.57 1 1 0 011 1v3.57a1 1 0 01-1 1A17 17 0 013 5a1 1 0 011-1h3.59a1 1 0 011 1 11.36 11.36 0 00.57 3.57 1 1 0 01-.25 1z"/></svg></div>
         <span>914 038 167</span>
       </div>
-
       <div class="contact-item">
-        <div class="c-icon">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/></svg>
-        </div>
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 00-2 2v12a2 2 0 002 2h16a2 2 0 002-2V6a2 2 0 00-2-2zm0 4l-8 5-8-5V6l8 5 8-5z"/></svg></div>
         <a href="mailto:joao4duarte@gmail.com">joao4duarte@gmail.com</a>
       </div>
-
       <div class="contact-item">
-        <div class="c-icon">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
-        </div>
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg></div>
         <a href="https://www.linkedin.com/in/joao4duarte" target="_blank">linkedin.com/in/joao4duarte</a>
       </div>
-
       <div class="contact-item">
-        <div class="c-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-        </div>
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></div>
         <a href="https://djore4.github.io" target="_blank">djore4.github.io</a>
       </div>
-
       <div class="contact-item">
-        <div class="c-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-        </div>
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
         <span>Porto, Portugal</span>
       </div>
     </div>
@@ -715,7 +594,7 @@
       <div class="lang-item">
         <span class="lang-name">Inglês</span>
         <div class="lang-dots">
-          <div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot"></div>
+          <div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot fill"></div><div class="dot half"></div>
         </div>
       </div>
       <div class="lang-item">
@@ -760,7 +639,7 @@
         <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:92%"></div></div>
       </div>
       <div class="skill-item">
-        <div class="skill-name">Estratégia & Desenvolvimento Negócio</div>
+        <div class="skill-name">Estratégia & Desenvolvimento de Negócio</div>
         <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%"></div></div>
       </div>
       <div class="skill-item">
@@ -786,10 +665,9 @@
         <span class="tool-chip">Heygen</span>
         <span class="tool-chip">GitHub</span>
         <span class="tool-chip">Supabase</span>
-        <span class="tool-chip">Power BI</span
-        
+        <span class="tool-chip">Power BI</span>
         <span class="tool-chip">Power Automate</span>
-        <span class="tool-chip">Office365</span>
+        <span class="tool-chip">Office 365</span>
         <span class="tool-chip">Excel VBA</span>
         <span class="tool-chip">SAP</span>
         <span class="tool-chip">Solidworks</span>
@@ -820,23 +698,20 @@
   <!-- ══════════ MAIN ══════════ -->
   <main class="main">
 
-    <!-- Top bar -->
     <div class="top-bar">
       <div class="name">JOÃO <span>DUARTE</span></div>
       <div class="role">Head of Sales · AI Practitioner · Mechanical Engineer · MSc Production Management</div>
       <p class="summary">
         Engenheiro Mecânico com Mestrado em Gestão da Produção e mais de 12 anos de experiência em liderança comercial, gestão de equipas e desenvolvimento de negócio no setor automóvel. Pós-Graduando em Direção de Empresas na Porto Business School. Utilizador avançado de ferramentas de Inteligência Artificial Generativa aplicadas à produtividade, automação e criação de plataformas digitais — com impacto mensurável em eficiência operacional e tomada de decisão.
       </p>
-     </div>
+    </div>
 
-    <!-- Content -->
     <div class="content-area">
 
       <!-- EXPERIENCE -->
       <div class="section">
         <div class="section-title"><div class="accent"></div>Experiência Profissional</div>
 
-        <!-- Caetano Baviera -->
         <div class="exp-item current">
           <div class="exp-header">
             <div class="exp-title">Head of Sales</div>
@@ -848,6 +723,7 @@
             <span class="exp-tag">Gestão Comercial</span>
             <span class="exp-tag">Negociação</span>
             <span class="exp-tag">Electrificação</span>
+            <span class="exp-tag">Fiscalidade Automóvel</span>
             <span class="exp-tag">Logística</span>
             <span class="exp-tag">Conflict Management</span>
             <span class="exp-tag ai-tag">Power BI</span>
@@ -855,7 +731,6 @@
           </div>
         </div>
 
-        <!-- Matrizauto -->
         <div class="exp-item">
           <div class="exp-header">
             <div class="exp-title">International Trading</div>
@@ -864,14 +739,14 @@
           <div class="exp-company">Matrizauto — Grupo JAP</div>
           <div class="exp-tags">
             <span class="exp-tag">Negociação Internacional</span>
+            <span class="exp-tag">Comércio Internacional</span>
             <span class="exp-tag">Incoterms</span>
             <span class="exp-tag">SRM</span>
             <span class="exp-tag">Gestão de Projetos Transversais</span>
-            <span class="exp-tag">Advisor Automóvel</span>
+            <span class="exp-tag">Board Advisor</span>
           </div>
         </div>
 
-        <!-- Audi JAPSport -->
         <div class="exp-item">
           <div class="exp-header">
             <div class="exp-title">Head of Sales — 2 Concessionários</div>
@@ -879,6 +754,7 @@
           </div>
           <div class="exp-company">Audi JAPSport — Grupo JAP</div>
           <div class="exp-tags">
+            <span class="exp-tag">Gestão Comercial</span>
             <span class="exp-tag">Gestão de Equipas</span>
             <span class="exp-tag">Planeamento</span>
             <span class="exp-tag">CRM</span>
@@ -887,7 +763,6 @@
           </div>
         </div>
 
-        <!-- Empigest -->
         <div class="exp-item">
           <div class="exp-header">
             <div class="exp-title">Comercial & Gestão de Parcerias</div>
@@ -902,7 +777,6 @@
           </div>
         </div>
 
-        <!-- Teixeira Duarte -->
         <div class="exp-item">
           <div class="exp-header">
             <div class="exp-title">Automotive Development & Commercial Support</div>
@@ -918,7 +792,6 @@
           </div>
         </div>
 
-        <!-- NOS -->
         <div class="exp-item">
           <div class="exp-header">
             <div class="exp-title">Product Management → Controller → Project Manager</div>
@@ -948,7 +821,7 @@
         <div class="platform-item">
           <div class="platform-dot"></div>
           <span class="platform-link">Caetano Sales Force</span>
-          <span class="platform-desc">— Repositório de viaturas de stock, controlo de reservas, consulta de especificações e comparativos modelo/modelo e modelo/marca</span>
+          <span class="platform-desc">— Repositório de viaturas de stock, controlo de reservas, especificações e comparativos modelo/modelo e modelo/marca</span>
         </div>
         <div class="platform-item">
           <div class="platform-dot"></div>
@@ -962,7 +835,7 @@
         </div>
       </div>
 
-      <!-- EDUCATION -->
+      <!-- EDUCATION — mais recente primeiro -->
       <div class="section">
         <div class="section-title"><div class="accent"></div>Formação Académica & Certificações</div>
 
@@ -983,22 +856,6 @@
         </div>
 
         <div class="edu-item">
-          <div class="edu-year">2012</div>
-          <div class="edu-content">
-            <div class="edu-degree">Mestrado Integrado em Engenharia Mecânica</div>
-            <div class="edu-school">Faculdade de Engenharia da Universidade do Porto — Especialização em Gestão da Produção</div>
-          </div>
-        </div>
-
-        <div class="edu-item">
-          <div class="edu-year">2013</div>
-          <div class="edu-content">
-            <div class="edu-degree">Initial Management Program — Sonae Academy</div>
-            <div class="edu-school">Porto Business School (colaboração com NOS Comunicações)</div>
-          </div>
-        </div>
-
-        <div class="edu-item">
           <div class="edu-year">2015</div>
           <div class="edu-content">
             <div class="edu-degree">Branding: A Key to Professional Success</div>
@@ -1006,15 +863,30 @@
           </div>
         </div>
 
+        <div class="edu-item">
+          <div class="edu-year">2013</div>
+          <div class="edu-content">
+            <div class="edu-degree">Initial Management Program — Sonae Academy</div>
+            <div class="edu-school">Porto Business School · NOS Comunicações</div>
+          </div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-year">2012</div>
+          <div class="edu-content">
+            <div class="edu-degree">Mestrado Integrado em Engenharia Mecânica</div>
+            <div class="edu-school">Faculdade de Engenharia da Universidade do Porto — Gestão da Produção</div>
+          </div>
+        </div>
+
       </div>
 
     </div>
 
-    <!-- Footer -->
     <div class="cv-footer">
       <span class="footer-text"><strong>João Carlos Assunção Duarte</strong> · Porto, 1987</span>
       <span class="footer-text">joao4duarte@gmail.com · 914 038 167</span>
-      <span class="footer-text" style="color:#ccc;">1</span>
+      <span class="footer-text" style="color:#ccc;">Maio 2025</span>
     </div>
 
   </main>
