@@ -349,18 +349,36 @@
       height: 297mm;
       box-shadow: none;
       margin: 0;
-      overflow: hidden;
+      overflow: visible;
     }
     * {
       -webkit-print-color-adjust: exact !important;
       print-color-adjust: exact !important;
       color-adjust: exact !important;
       animation: none !important;
-      filter: none !important;
-      -webkit-filter: none !important;
       transition: none !important;
     }
-    .ai-dot { animation: none !important; }
+    /* Remove all GPU compositing triggers */
+    .top-bar {
+      overflow: visible !important;
+    }
+    /* Hide elements that force compositing layers */
+    .sig-wrap { display: none !important; }
+    .ai-dot { display: none !important; }
+    .ai-badge { display: none !important; }
+    /* Fix half-dot: replace gradient with solid color */
+    .dot.half {
+      background: var(--green) !important;
+      opacity: 0.5 !important;
+    }
+    /* Remove box-shadows that cause compositing */
+    .exp-item.current::before {
+      box-shadow: none !important;
+    }
+    .sidebar::before,
+    .sidebar::after {
+      display: none !important;
+    }
     @page { size: A4; margin: 0; }
   }
 
